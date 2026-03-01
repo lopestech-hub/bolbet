@@ -10,7 +10,7 @@
   - Times, Placar, Tempo, Mercado, Odd e Nome da Estratégia.
   - Link direto para a Betfair Exchange para operação imediata.
 
-### �📝 Gestão Financeira e Robótica (Estratégias)
+### 📝 Gestão Financeira e Robótica (Estratégias)
 
 - **Implementação de Stake:** Campo de Stake (R$) individual para cada estratégia.
 - **Cálculo de Profit Real:** Lucro líquido baseado na stake e odds reais de entrada.
@@ -30,12 +30,31 @@
 
 ---
 
-## 🎯 Próximos Passos
+## ✅ 🚀 LANÇAMENTO & DEPLOY (Ready!)
 
-1. **Filtro de Histórico:** Adicionar busca por data no modal de histórico global.
-2. **Dashboard Gráfico:** Criar gráfico de linha (PNL) para cada estratégia no card.
-3. **Múltiplos Canais:** Permitir configurar um Telegram diferente para cada estratégia.
+- [x] Dockerfile Full-stack Multi-stage criado.
+- [x] Backend configurado para servir Frontend estático (`@fastify/static`).
+- [x] Roteamento React Router configurado (NotFound fallback).
+- [x] Repositório Git local consolidado.
+- [x] Registrada tabela `configuracoes` para Telegram no Prisma.
+
+## 📱 TELEGRAM & ALERTAS
+
+- [x] Modal de Configuração no Dashboard (Token & Chat ID).
+- [x] Teste de Conexão funcional.
+- [x] Notificação de Entradas Manuais (Sniper) - OK!
+- [x] Notificação de Entradas Automáticas (Bot Service) - OK!
+- [x] Formatação Premium da mensagem com link da Betfair.
+- [x] Logs de telemetria e rastreio para monitorar envios.
+
+## 📋 PRÓXIMOS PASSOS (Coolify)
+
+1. **GitHub Auth**: Realizar o `git push` no terminal local (usuário e senha do repo).
+2. **Coolify App**: Adicionar novo serviço no Coolify via URL do GitHub.
+3. **Environment Variables**:
+   - `DATABASE_URL`: URL do seu banco PostgreSQL na VPS.
+   - `PORT`: 3000 (Expor no FQDN do Coolify).
+4. **Deploy**: Ativar o deploy automático via GitHub Webhook.
 
 ---
-*Antigravity AI Assistant*
-*Sessão finalizada em: 01/03/2026 às 18:35*
+*Ultima atualização: 01/03/2026 às 19:25* 🦾🚀⚽

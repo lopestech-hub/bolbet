@@ -328,7 +328,7 @@ const StrategiesPage = () => {
   const [stake, setStake] = useState(10)
   const [targetMarket, setTargetMarket] = useState('over05ht')
   const [activeRules, setActiveRules] = useState<any[]>([])
-  const [newRule, setNewRule] = useState({ metric: 'pi1_total', op: '>=', val: 50 })
+  const [newRule, setNewRule] = useState({ metric: 'pi1_total', op: '>=', val: 50, valMax: 100 })
   const [editingId, setEditingId] = useState<string | null>(null)
 
   // Estados Telegram
@@ -662,13 +662,29 @@ const StrategiesPage = () => {
                 <option value=">=">≥</option>
                 <option value="<=">≤</option>
                 <option value="==">=</option>
+                <option value="BETWEEN">ENTRE</option>
               </select>
-              <input
-                type="number"
-                value={newRule.val}
-                onChange={e => setNewRule({ ...newRule, val: Number(e.target.value) })}
-                className="w-14 bg-zinc-950 border border-zinc-800 text-[11px] font-black rounded-sm px-1.5 h-8 outline-none tabular-nums"
-              />
+              <div className="flex items-center gap-1">
+                <input
+                  type="number"
+                  value={newRule.val}
+                  onChange={e => setNewRule({ ...newRule, val: Number(e.target.value) })}
+                  className="w-14 bg-zinc-950 border border-zinc-800 text-[11px] font-black rounded-sm px-1.5 h-8 outline-none tabular-nums"
+                  placeholder="Min"
+                />
+                {newRule.op === 'BETWEEN' && (
+                  <>
+                    <span className="text-[10px] text-zinc-600 font-black">e</span>
+                    <input
+                      type="number"
+                      value={newRule.valMax}
+                      onChange={e => setNewRule({ ...newRule, valMax: Number(e.target.value) })}
+                      className="w-14 bg-zinc-950 border border-zinc-800 text-[11px] font-black rounded-sm px-1.5 h-8 outline-none tabular-nums border-blue-500/50"
+                      placeholder="Max"
+                    />
+                  </>
+                )}
+              </div>
               <button
                 onClick={() => setActiveRules([...activeRules, { ...newRule, id: Date.now() }] as any[])}
                 className="btn-interativo btn-secondary h-8 px-4"
@@ -684,7 +700,7 @@ const StrategiesPage = () => {
           {activeRules.length === 0 && <span className="text-[9px] text-zinc-700 italic px-1">Defina seus filtros acima...</span>}
           {activeRules.map(r => (
             <div key={r.id} className="flex items-center gap-1.5 px-2 py-0.5 bg-blue-600/10 border border-blue-500/30 rounded-full text-[9px] font-black text-blue-400 uppercase tracking-tight">
-              {metrics.find(m => m.id === r.metric)?.label} {r.op} {r.val}
+              {metrics.find(m => m.id === r.metric)?.label} {r.op === 'BETWEEN' ? `ENTRE ${r.val} E ${r.valMax}` : `${r.op} ${r.val}`}
               <button
                 onClick={() => setActiveRules(activeRules.filter(x => x.id !== r.id))}
                 className="hover:text-white transition-colors p-1"

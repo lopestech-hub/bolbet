@@ -86,6 +86,11 @@ export async function runBotEngine() {
                     if (f.op === '>=') pass = valJ >= Number(f.val)
                     else if (f.op === '<=') pass = valJ <= Number(f.val)
                     else if (f.op === '==') pass = valJ === Number(f.val)
+                    else if (f.op === 'BETWEEN') {
+                        const min = Number(f.val)
+                        const max = Number(f.valMax || f.val) // Se não houver max, usa o próprio val
+                        pass = valJ >= min && valJ <= max
+                    }
 
                     // if (!pass) console.log(`   ❌ Regra falhou: ${f.metric} (${valJ}) ${f.op} ${f.val}`)
                     return pass
