@@ -1,0 +1,212 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model jogos {
+  id                                String      @id
+  liga                              String
+  time_casa                         String
+  time_visitante                    String
+  link_betfair                      String?
+  link_superbet                     String?
+  link_bet365                       String?
+  placar_ht_casa                    Int?
+  placar_ht_visitante               Int?
+  placar_ht_total                   Int?
+  h2h_casa                          Decimal?    @db.Decimal(5, 2)
+  h2h_visitante                     Decimal?    @db.Decimal(5, 2)
+  h2h_total                         Decimal?    @db.Decimal(5, 2)
+  classificacao_casa                Int?
+  classificacao_visitante           Int?
+  classificacao_total               Int?
+  ppj_casa                          Decimal?    @db.Decimal(4, 2)
+  ppj_visitante                     Decimal?    @db.Decimal(4, 2)
+  ppj_total                         Decimal?    @db.Decimal(4, 2)
+  vitoria_casa                      Decimal?    @db.Decimal(5, 2)
+  vitoria_visitante                 Decimal?    @db.Decimal(5, 2)
+  vitoria_total                     Decimal?    @db.Decimal(5, 2)
+  derrota_casa                      Decimal?    @db.Decimal(5, 2)
+  derrota_visitante                 Decimal?    @db.Decimal(5, 2)
+  derrota_total                     Decimal?    @db.Decimal(5, 2)
+  media_gols_marcados_casa          Decimal?    @db.Decimal(4, 2)
+  media_gols_marcados_visitante     Decimal?    @db.Decimal(4, 2)
+  media_gols_marcados_total         Decimal?    @db.Decimal(4, 2)
+  media_gols_marcados_ht_casa       Decimal?    @db.Decimal(4, 2)
+  media_gols_marcados_ht_visitante  Decimal?    @db.Decimal(4, 2)
+  media_gols_marcados_ht_total      Decimal?    @db.Decimal(4, 2)
+  media_gols_sofridos_casa          Decimal?    @db.Decimal(4, 2)
+  media_gols_sofridos_visitante     Decimal?    @db.Decimal(4, 2)
+  media_gols_sofridos_total         Decimal?    @db.Decimal(4, 2)
+  medias_gols_sofridos_ht_casa      Decimal?    @db.Decimal(4, 2)
+  medias_gols_sofridos_ht_visitante Decimal?    @db.Decimal(4, 2)
+  medias_gols_sofridos_ht_total     Decimal?    @db.Decimal(4, 2)
+  xg_pre_casa                       Decimal?    @db.Decimal(4, 2)
+  xg_pre_visitante                  Decimal?    @db.Decimal(4, 2)
+  xg_pre_total                      Decimal?    @db.Decimal(4, 2)
+  xga_pre_casa                      Decimal?    @db.Decimal(4, 2)
+  xga_pre_visitante                 Decimal?    @db.Decimal(4, 2)
+  xga_pre_total                     Decimal?    @db.Decimal(4, 2)
+  clean_sheet_casa                  Decimal?    @db.Decimal(5, 2)
+  clean_sheet_visitante             Decimal?    @db.Decimal(5, 2)
+  clean_sheet_total                 Decimal?    @db.Decimal(5, 2)
+  btts_casa                         Decimal?    @db.Decimal(5, 2)
+  btts_visitante                    Decimal?    @db.Decimal(5, 2)
+  btts_total                        Decimal?    @db.Decimal(5, 2)
+  over_05_ht_casa                   Decimal?    @db.Decimal(5, 2)
+  over_05_ht_visitante              Decimal?    @db.Decimal(5, 2)
+  over_05_ht_total                  Decimal?    @db.Decimal(5, 2)
+  over_15_casa                      Decimal?    @db.Decimal(5, 2)
+  over_15_visitante                 Decimal?    @db.Decimal(5, 2)
+  over_15_total                     Decimal?    @db.Decimal(5, 2)
+  over_25_casa                      Decimal?    @db.Decimal(5, 2)
+  over_25_visitante                 Decimal?    @db.Decimal(5, 2)
+  over_25_total                     Decimal?    @db.Decimal(5, 2)
+  over_05_marcados_casa             Decimal?    @db.Decimal(5, 2)
+  over_05_marcados_visitante        Decimal?    @db.Decimal(5, 2)
+  over_05_marcados_total            Decimal?    @db.Decimal(5, 2)
+  over_05_sofridos_casa             Decimal?    @db.Decimal(5, 2)
+  over_05_sofridos_visitante        Decimal?    @db.Decimal(5, 2)
+  over_05_sofridos_total            Decimal?    @db.Decimal(5, 2)
+  media_gols_casa                   Decimal?    @db.Decimal(4, 2)
+  media_gols_visitante              Decimal?    @db.Decimal(4, 2)
+  media_gols_total                  Decimal?    @db.Decimal(4, 2)
+  media_gols_ht_casa                Decimal?    @db.Decimal(4, 2)
+  media_gols_ht_visitante           Decimal?    @db.Decimal(4, 2)
+  media_gols_ht_total               Decimal?    @db.Decimal(4, 2)
+  gol_75_casa                       Decimal?    @db.Decimal(5, 2)
+  gol_75_visitante                  Decimal?    @db.Decimal(5, 2)
+  gol_75_total                      Decimal?    @db.Decimal(5, 2)
+  odds_casa_pre                     Decimal?    @db.Decimal(6, 2)
+  odds_visitante_pre                Decimal?    @db.Decimal(6, 2)
+  odds_empate_pre                   Decimal?    @db.Decimal(6, 2)
+  odds_btts_sim_pre                 Decimal?    @db.Decimal(6, 2)
+  odds_over_05_pre                  Decimal?    @db.Decimal(6, 2)
+  odds_over_15_pre                  Decimal?    @db.Decimal(6, 2)
+  odds_over_25_pre                  Decimal?    @db.Decimal(6, 2)
+  odds_over_35_pre                  Decimal?    @db.Decimal(6, 2)
+  odds_over_05_ht_pre               Decimal?    @db.Decimal(6, 2)
+  criado_em                         DateTime    @default(now()) @db.Timestamptz(6)
+  status                            String?     @default("AO_VIVO")
+  placar_final_casa                 Int?
+  placar_final_visitante            Int?
+  snapshots                         snapshots[]
+}
+
+model snapshots {
+  id                               String   @id @default(dbgenerated("(gen_random_uuid())::text"))
+  jogo_id                          String
+  periodo                          Int
+  tempo                            Int
+  placar_casa                      Int      @default(0)
+  placar_visitante                 Int      @default(0)
+  placar_total                     Int      @default(0)
+  xg_casa                          Decimal? @db.Decimal(4, 2)
+  xg_visitante                     Decimal? @db.Decimal(4, 2)
+  xg_total                         Decimal? @db.Decimal(4, 2)
+  pi1_casa                         Decimal? @db.Decimal(6, 2)
+  pi1_visitante                    Decimal? @db.Decimal(6, 2)
+  pi1_total                        Decimal? @db.Decimal(6, 2)
+  pi2_casa                         Decimal? @db.Decimal(6, 2)
+  pi2_visitante                    Decimal? @db.Decimal(6, 2)
+  pi2_total                        Decimal? @db.Decimal(6, 2)
+  pi3_casa                         Decimal? @db.Decimal(6, 2)
+  pi3_visitante                    Decimal? @db.Decimal(6, 2)
+  pi3_total                        Decimal? @db.Decimal(6, 2)
+  appm_casa                        Decimal? @db.Decimal(5, 2)
+  appm_visitante                   Decimal? @db.Decimal(5, 2)
+  appm_total                       Decimal? @db.Decimal(5, 2)
+  appm10_casa                      Decimal? @db.Decimal(5, 2)
+  appm10_visitante                 Decimal? @db.Decimal(5, 2)
+  appm10_total                     Decimal? @db.Decimal(5, 2)
+  cg_casa                          Int?
+  cg_visitante                     Int?
+  cg_total                         Int?
+  cg10_casa                        Int?
+  cg10_visitante                   Int?
+  cg10_total                       Int?
+  total_chutes_casa                Int?
+  total_chutes_visitante           Int?
+  total_chutes_total               Int?
+  chutes_ao_gol_casa               Int?
+  chutes_ao_gol_visitante          Int?
+  chutes_ao_gol_total              Int?
+  chutes_fora_casa                 Int?
+  chutes_fora_visitante            Int?
+  chutes_fora_total                Int?
+  cantos_ht_casa                   Int?
+  cantos_ht_visitante              Int?
+  cantos_ht_total                  Int?
+  cantos_casa                      Int?
+  cantos_visitante                 Int?
+  cantos_total                     Int?
+  ataques_casa                     Int?
+  ataques_visitante                Int?
+  ataques_total                    Int?
+  ataques_perigosos_casa           Int?
+  ataques_perigosos_visitante      Int?
+  ataques_perigosos_total          Int?
+  posse_casa                       Decimal? @db.Decimal(5, 2)
+  posse_visitante                  Decimal? @db.Decimal(5, 2)
+  posse_total                      Decimal? @db.Decimal(5, 2)
+  cartoes_amarelos_casa            Int?
+  cartoes_amarelos_visitante       Int?
+  cartoes_amarelos_total           Int?
+  cartoes_vermelhos_casa           Int?
+  cartoes_vermelhos_visitante      Int?
+  cartoes_vermelhos_total          Int?
+  ultimo_gol_casa                  Int?
+  ultimo_gol_visitante             Int?
+  ultimo_gol_total                 Int?
+  tempo_desde_ultimo_gol_casa      Int?
+  tempo_desde_ultimo_gol_visitante Int?
+  tempo_desde_ultimo_gol_total     Int?
+  odds_casa_live                   Decimal? @db.Decimal(6, 2)
+  odds_visitante_live              Decimal? @db.Decimal(6, 2)
+  odds_empate_live                 Decimal? @db.Decimal(6, 2)
+  odds_btts_sim_live               Decimal? @db.Decimal(6, 2)
+  odds_over_05_live                Decimal? @db.Decimal(6, 2)
+  odds_over_15_live                Decimal? @db.Decimal(6, 2)
+  odds_over_25_live                Decimal? @db.Decimal(6, 2)
+  odds_over_35_live                Decimal? @db.Decimal(6, 2)
+  odds_over_05_ht_live             Decimal? @db.Decimal(6, 2)
+  cg_gol_marcados_casa             Int?
+  cg_gol_marcados_visitante        Int?
+  cg_gol_marcados_total            Int?
+  primeiro_gol_casa                Decimal? @db.Decimal(5, 2)
+  primeiro_gol_visitante           Decimal? @db.Decimal(5, 2)
+  primeiro_gol_total               Decimal? @db.Decimal(5, 2)
+  capturado_em                     DateTime @default(now()) @db.Timestamptz(6)
+  jogos                            jogos    @relation(fields: [jogo_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@unique([jogo_id, periodo, tempo])
+  @@index([capturado_em], map: "idx_snapshots_capturado_em")
+  @@index([jogo_id], map: "idx_snapshots_jogo_id")
+  @@index([jogo_id, periodo, tempo], map: "idx_snapshots_jogo_periodo_tempo")
+}
+model estrategias {
+  id        String   @id @default(dbgenerated("gen_random_uuid()"))
+  nome      String
+  regras    Json
+  mercado   String?
+  bot_ativo Boolean? @default(false)
+  criado_em DateTime @default(now()) @db.Timestamptz(6)
+}
+
+model entradas {
+  id             String   @id @default(dbgenerated("gen_random_uuid()"))
+  jogo_id        String
+  estrategia_id  String?
+  mercado        String
+  odd_entrada    Decimal? @db.Decimal(6, 2)
+  placar_momento String
+  tempo_momento  Int
+  status         String?  @default("PENDENTE")
+  contexto_stats Json?
+  placar_final   String?
+  criado_em      DateTime @default(now()) @db.Timestamptz(6)
+}

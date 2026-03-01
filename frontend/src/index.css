@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: hsl(222.2 84% 4.9%);
+  --color-foreground: hsl(210 40% 98%);
+  --color-primary: hsl(217.2 91.2% 59.8%);
+}
+
+@layer base {
+  body {
+    @apply bg-slate-950 text-slate-50 font-sans antialiased selection:bg-blue-500/30;
+  }
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+.glass {
+  @apply bg-white/5 backdrop-blur-md border border-white/10;
+}
+
+.card-trader {
+  @apply bg-[#0b0c14] border border-zinc-900/50 rounded-lg p-3 hover:border-blue-500/30 transition-all;
+}
+
+/* --- SISTEMA DE BOTÕES PREMIUM --- */
+
+.btn-interativo {
+  @apply relative transition-all duration-200 active:scale-95 cursor-pointer select-none flex items-center justify-center gap-2 px-4 h-8 rounded-sm font-black uppercase text-[10px] tracking-[0.1em] border shadow-lg disabled:opacity-30 disabled:pointer-events-none;
+}
+
+.btn-primary {
+  @apply bg-blue-600 border-blue-400/30 text-white hover:bg-blue-500 hover:shadow-blue-500/20 hover:border-blue-400/50;
+}
+
+.btn-secondary {
+  @apply bg-zinc-900 border-zinc-800 text-zinc-400 hover:bg-zinc-800 hover:text-white hover:border-zinc-700;
+}
+
+.btn-danger {
+  @apply bg-red-950/20 border-red-900/40 text-red-500 hover:bg-red-600 hover:text-white hover:border-red-400 hover:shadow-red-500/20;
+}
+
+.btn-success {
+  @apply bg-emerald-950/20 border-emerald-900/40 text-emerald-500 hover:bg-emerald-600 hover:text-white hover:border-emerald-400 hover:shadow-emerald-500/20;
+}
+
+/* Scrollbar Style */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-zinc-950;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-zinc-800 rounded-full hover:bg-zinc-700 transition-colors;
+}

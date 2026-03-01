@@ -1,0 +1,28 @@
+# Node & Dependências
+node_modules/
+backend/node_modules/
+frontend/node_modules/
+
+# Build & Logs
+dist/
+build/
+backend/dist/
+frontend/dist/
+*.log
+backend/*.txt
+frontend/*.txt
+
+# Ambiente & Segredos
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+backend/.env
+frontend/.env
+
+# IDE & OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
