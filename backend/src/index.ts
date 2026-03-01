@@ -1,6 +1,8 @@
 import 'dotenv/config'
 import fastify from 'fastify'
 import cors from '@fastify/cors'
+import fastifyStatic from '@fastify/static'
+import path from 'path'
 
 // Suporte global para BigInt (Fix para erro de serialização JSON do Prisma/PostgreSQL)
 (BigInt.prototype as any).toJSON = function () {
@@ -18,6 +20,12 @@ const server = fastify({
     }
 })
 
+// Servir frontend compilado (Pasta public)
+server.register(fastifyStatic, {
+    root: path.join(__dirname, '../public'),
+    prefix: '/',
+})
+
 server.register(cors, {
     origin: '*',
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
@@ -25,13 +33,6 @@ server.register(cors, {
     credentials: true,
     preflightContinue: false,
     optionsSuccessStatus: 204
-})
-
-// Log de Auditoria: Monitora todas as chegadas
-server.addHook('onRequest', async (request) => {
-    if (request.url.includes('/api/')) {
-        console.log(`[INCOMING] ${request.method} ${request.url}`)
-    }
 })
 
 // Módulos
@@ -48,6 +49,15 @@ server.register(configRoutes, { prefix: '/api/config' })
 
 server.get('/health', async () => {
     return { status: 'ok', timestamp: new Date().toISOString() }
+})
+
+// Suporte ao React Router (Fallback para o index.html em rotas não-API)
+server.setNotFoundHandler((request, reply) => {
+    if (request.url.startsWith('/api/')) {
+        reply.code(404).send({ error: 'API route not found' })
+    } else {
+        reply.sendFile('index.html')
+    }
 })
 
 // Iniciar o motor do Bot (Vigilância 24/7)

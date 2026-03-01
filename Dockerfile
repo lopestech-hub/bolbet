@@ -1,33 +1,46 @@
-# Build Frontend
+# ==========================================
+# 1. BUILD FRONTEND
+# ==========================================
 FROM node:20-alpine AS frontend-builder
 WORKDIR /app/frontend
 COPY frontend/package*.json ./
-RUN npm ci
-COPY frontend/ .
+RUN npm install
+COPY frontend/ ./
 RUN npm run build
 
-# Build Backend
+# ==========================================
+# 2. BUILD BACKEND
+# ==========================================
 FROM node:20-alpine AS backend-builder
 WORKDIR /app/backend
 COPY backend/package*.json ./
-RUN npm ci
-COPY backend/ .
+RUN npm install
+COPY backend/ ./
+# Gera o cliente Prisma antes do build TS
 RUN npx prisma generate
 RUN npm run build
 
-# Final Image
+# ==========================================
+# 3. RUNTIME FINAL
+# ==========================================
 FROM node:20-alpine
-ENV TZ=America/Sao_Paulo
 WORKDIR /app
 
-# Instalar dependências de produção apenas
-COPY backend/package*.json ./ backend/
-RUN cd backend && npm ci --omit=dev
+# Variáveis de ambiente padrão
+ENV NODE_ENV=production
+ENV PORT=3000
 
-# Copiar build do backend e frontend
-COPY --from=backend-builder /app/backend/dist ./backend/dist
-COPY --from=backend-builder /app/backend/node_modules/.prisma ./backend/node_modules/.prisma
+# Copia backend buildado
+COPY --from=backend-builder /app/backend/dist ./dist
+COPY --from=backend-builder /app/backend/node_modules ./node_modules
+COPY --from=backend-builder /app/backend/package.json ./package.json
+COPY --from=backend-builder /app/backend/prisma ./prisma
+
+# Copia frontend buildado para uma pasta estática que o backend irá servir
 COPY --from=frontend-builder /app/frontend/dist ./public
 
+# Exposição da porta
 EXPOSE 3000
-CMD ["node", "backend/dist/index.js"]
+
+# Comando de inicialização (Roda migrações prisma se necessário e inicia)
+CMD ["sh", "-c", "npx prisma generate && node dist/index.js"]
