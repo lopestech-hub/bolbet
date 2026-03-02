@@ -84,14 +84,14 @@ export default async function (fastify: FastifyInstance) {
 
             // --- DISPARAR ALERTA TELEGRAM ---
             try {
-                // IDs podem vir como string ou number dependendo da fonte
+                // IDs no banco de dados são Strings
                 const jId = String(jogo_id);
-                const sId = estrategia_id ? Number(estrategia_id) : null;
+                const sId = estrategia_id ? String(estrategia_id) : null;
 
                 console.log(`📡 Gatilho capturado: Jogo ${jId}, Estrategia ${sId || 'Sniper'}`);
 
                 const jogo: any = await prisma.jogos.findUnique({ where: { id: jId } });
-                const estrategia: any = (sId && !isNaN(sId)) ? await prisma.estrategias.findUnique({ where: { id: sId } }) : null;
+                const estrategia: any = sId ? await prisma.estrategias.findUnique({ where: { id: sId } }) : null;
 
                 if (jogo) {
                     console.log(`🔥 Transmitindo alerta para ${jogo.time_casa} @ ${oddValue}...`);
